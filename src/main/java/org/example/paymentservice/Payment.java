@@ -1,7 +1,6 @@
 package org.example.paymentservice;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class Payment {
@@ -14,7 +13,7 @@ public class Payment {
     private String customerId;
     private Double amount;
     private String currency;
-    private LocalDateTime paymentDate;
+    private Long paymentDate;
 
     public Long getId() {
         return id;
@@ -56,12 +55,15 @@ public class Payment {
         this.currency = currency;
     }
 
-    public LocalDateTime getPaymentDate() {
+    public Long getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(LocalDateTime paymentDate) {
+    public void setPaymentDate(Long paymentDate) {
         this.paymentDate = paymentDate;
+    }
+
+    public void setDescription(String description) {
     }
 }
 

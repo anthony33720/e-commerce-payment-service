@@ -35,12 +35,12 @@ public class PaymentController {
     @PostMapping("/customer")
     public ResponseEntity<?> createCustomer(@RequestParam String email, @RequestParam String source) {
         try {
-            Customer customer = paymentService.createCustomer(email, source);
-            return ResponseEntity.ok(customer);
-        } catch (PaymentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            String customerJson = paymentService.createCustomer(email, source);
+            return ResponseEntity.ok(customerJson);
         } catch (StripeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(500).body("StripeException: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("An unexpected error occurred: " + e.getMessage());
         }
     }
 }
